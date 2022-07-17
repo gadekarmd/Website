@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <script>
+
+        function register() {
+
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var username = document.getElementById("username").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var gender = document.getElementById("gender").value;
+            var location = document.getElementById("location").value;
+            var checkedInt = document.getElementsByName('interest');
+            var interests = [];
+            for (var i = 0; i < checkedInt.length; i++) {
+                if (checkedInt[i].checked) {
+                    interests.push(checkedInt[i].value);
+                }
+
+            }
+            registerUser(firstName, lastName, username, email, password, gender, location, interests);
+
+        }
+
+        async function registerUser(firstName, lastName, username, email, password, gender, location, interests) {
+
+            data = {};
+            data.firstName = firstName;
+            data.lastName = lastName;
+            data.username = username;
+            data.email = email;
+            data.password = password;
+            data.gender = gender;
+            data.interests = interests;
+            data.location = location;
+            let response = await fetch("http://localhost:3000/users", {
+
+                method: "POST",
+                headers: {
+
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (response.status == 201) {
+
+                alert("You are successfully registered! You can login now...");
+                window.location.href = "login.html";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Register </h1>
+    <h3> First Name : <input type="text" id="firstName" /> </h3>
+    <h3>Last Name : <input type="text" name="Last name" id="lastName"></h3>
+    <h3>User Name : <input type="text" name="User Name" id="username"></h3>
+    <h3>Email : <input type="email" name="Email" id="email"></h3>
+    <h3>Password : <input type="password" id="password" /> </h3>
+    <h3>Gender :
+        <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+    </h3>
+
+    <h3>Location : <input type="text" name="Location" id="location"></h3>
+    <h3>Interests :
+        <div>
+            <input type="checkbox" id="technology" name="interest" value="Technology" checked>
+            <label for="">Technology</label>
+        </div>
+        <div>
+            <input type="checkbox" id="cinemas" name="interest" value="Cinemas" checked>
+            <label for="cinemas">Cinemas</label>
+        </div>
+        <div>
+            <input type="checkbox" id="art" name="interest" value="Art">
+            <label for="art">Art</label>
+        </div>
+        <div>
+            <input type="checkbox" id="games" name="interest" value="Games">
+            <label for="games">Games</label>
+        </div>
+        <div>
+            <button id="select">Get Checked Checkboxes</button>
+        </div>
+        <br>
+    </h3>
+    <button onclick="register()">Register</button>
+</body>
+
+</html>

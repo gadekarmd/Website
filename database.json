@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "firstName": "Mayur",
+      "lastName": "Gadekar",
+      "username": "gadekarmd",
+      "email": "mayurdgadekar501@gmail.com",
+      "password": "65336533",
+      "gender": "male",
+      "interests": [
+        "Technology",
+        "Cinemas"
+      ],
+      "location": "Pune",
+      "id": 1
+    }
+  ]
+}
